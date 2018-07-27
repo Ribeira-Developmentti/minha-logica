@@ -11,6 +11,10 @@ public class Teste {
 
 	public static void main(String[] args) {
 		
+		// Usar a troca de 06 dezenas nos dois volantes escolhidos.
+		// Este é o fechamento para o começo de 5.
+		
+		
 		String[] comecoCincoNumeros = {"01", "02", "03", "04", "05"}; 
 		String[] restoCincoNumeros = {"06", "07", "08", "09", "10", "11", "12", "13", "14", "15",
 									  "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"};
@@ -36,7 +40,8 @@ public class Teste {
 			volante01.add(string);
 		}
 		
-		for(int i = 1; i <= 5; i++) {
+		// comando para trocar pedras
+		for(int i = 1; i <= 6; i++) {
 			int indEscolhido = r.nextInt(resto.size());
 			String numeroTroca = resto.get(indEscolhido);
 			resto.remove(indEscolhido);
@@ -48,12 +53,12 @@ public class Teste {
 			volante02.add(string);
 		}
 		
-		for (String string : comecoCincoNumeros) {
+		/*for (String string : comecoCincoNumeros) {
 			volante01.add(string);
-		}
-		for (String string : comecoCincoNumeros) {
+		}*/
+		/*for (String string : comecoCincoNumeros) {
 			volante02.add(string);
-		}
+		}*/
 		
 		
 		
