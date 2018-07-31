@@ -18,6 +18,8 @@ public class Util {
 	
 	public static int ids = 1;
 	
+	public static String[] resultado = new String[15];
+	
 	public static List<Volante> sortearVolanteFechamento(int idVolante, String[] comecoVolante, 
 												  String[] finalVolante, int quantidadeNumerosParaSortear,
 												  int quantidadeTrocaFechamento){
@@ -40,9 +42,8 @@ public class Util {
 		}
 		
 		// Instanciando o volante sorteado.
-		Volante volanteSorteado = new Volante(idVolante);
-	    Util.ids++; //Ao gerar um volante aumenta-se o último id;
-		for (String numero : numerosSorteados) {
+		Volante volanteSorteado = new Volante(idVolante + "A");
+	    for (String numero : numerosSorteados) {
 			volanteSorteado.getNumeros().add(numero);
 		}
 		inserirComeco(volanteSorteado, comecoVolante);
@@ -60,7 +61,7 @@ public class Util {
 			numerosSorteados.add(numeroTroca);
 		}
 		
-		Volante volanteFechado = new Volante(Util.ids);
+		Volante volanteFechado = new Volante(idVolante + "B");
 		Util.ids++; //Ao gerar um volante aumenta-se o último id;
 		for (String numero : numerosSorteados) {
 			volanteFechado.getNumeros().add(numero);
@@ -72,6 +73,17 @@ public class Util {
 		return volantesGerados;		
 	}
 	
+	public static void conferirVolante(Volante v, String[] resultado) {
+		for(String numero : resultado) {
+			for(String numero2 : v.getNumeros()) {
+				if(numero.equals(numero2)) {
+					int pontuacaoVolante = v.getPontuacao();
+					pontuacaoVolante++;
+					v.setPontuacao(pontuacaoVolante);
+				}
+			}
+		}
+	}
 	
 	
 	
