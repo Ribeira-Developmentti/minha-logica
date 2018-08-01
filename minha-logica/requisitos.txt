@@ -1,6 +1,6 @@
-1. Gerar Volantes (Já imprimindo os mesmos na tela);
-2. Salvar Volantes (Mostrando uma mensagem);
-3. Carregar Volantes (Se nao estiver vazio);
-4. Conferir Volantes (carrega, confere, imprime resultados 1 a 1, imprime relatório geral de pontuação, 11, 12, 13, 14, 15)se nao vazio.
-5. Inserir resultado para conferencia; salvar em arquivo
+3a.Conferir Volantes (carrega, confere, imprime resultados 1 a 1, imprime relatï¿½rio geral de pontuaï¿½ï¿½o, 11, 12, 13, 14, 15)se nao vazio.
+3b.imprimir txt resultados dos salvos
+4. Inserir resultado para conferencia; salvar em arquivo; colocar concurso
+6. FunÃ§Ã£o imprimir volantes salvos para txt
+
 s> sair
