@@ -16,6 +16,7 @@ public class Teste6 {
 				  "23", "24"};
 		
 		try (ObjectInput in = new ObjectInputStream(new FileInputStream("volantes.obj"))){
+			@SuppressWarnings("unchecked")
 			List<Volante> volantes = (List<Volante>) in.readObject();
 			
 			for (Volante v : volantes) {
