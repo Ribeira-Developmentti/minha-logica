@@ -1,3 +1,0 @@
-3a.Conferir Volantes (carrega, confere, imprime resultados 1 a 1, imprime relat�rio geral de pontua��o, 11, 12, 13, 14, 15)se nao vazio.
-3b.imprimir txt resultados dos salvos
-4. Inserir resultado para conferencia; salvar em arquivo; colocar concurso

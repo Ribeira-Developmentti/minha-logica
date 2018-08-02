@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import modelo.Resultado;
 import modelo.Volante;
 
 public class Util {
@@ -25,8 +26,6 @@ public class Util {
 	private static Random random = new Random();
 
 	public static int ids = 1;
-
-	public static String[] resultado = new String[15];
 
 	public static List<Volante> sortearVolanteFechamento(int idVolante, String[] comecoVolante, String[] finalVolante,
 			int quantidadeNumerosParaSortear, int quantidadeTrocaFechamento) {
@@ -80,8 +79,8 @@ public class Util {
 		return volantesGerados;
 	}
 
-	public static void conferirVolante(Volante v, String[] resultado) {
-		for (String numero : resultado) {
+	public static void conferirVolante(Volante v, Resultado resultado) {
+		for (String numero : resultado.getNumeros()) {
 			for (String numero2 : v.getNumeros()) {
 				if (numero.equals(numero2)) {
 					int pontuacaoVolante = v.getPontuacao();
@@ -110,9 +109,9 @@ public class Util {
 
 		try (ObjectOutput out = new ObjectOutputStream(new FileOutputStream("volantes.obj"))) {
 			out.writeObject(listaVolantes);
-			System.out.println("Volantes salvos com sucesso.");
+			System.out.println("+ Volantes salvos com sucesso.                 +");
 		} catch (IOException e) {
-			System.err.println("Erro ao salvar volantes." + e.getMessage());
+			System.err.println("+ Erro ao salvar volantes.                     +" + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -130,7 +129,8 @@ public class Util {
 
 	public static void imprimirVolantesTXT(List<Volante> todosVolantes) {
 		try(PrintStream writer = new PrintStream("volantes_impressos.txt")){
-			writer.println("Volantes Impressos em TXT");
+			
+			writer.println("++++++++++ Volantes Impressos em TXT +++++++++++");
 			for (Volante vol : todosVolantes) {
 				writer.println();
 				String id = vol.getId();
@@ -140,9 +140,32 @@ public class Util {
 				}
 				
 			}
-			System.out.println("Volantes impressos com sucesso.");
+			writer.println();
+			writer.println();
+			writer.println("++++++++++++++++++++++++++++++++++++++++++++++++");
+			System.out.println("+ Volantes impressos com sucesso.              +");
 		} catch (IOException e) {
-			System.out.println("Não conseguiu gravar o arquivo." + e.getMessage());
+			System.out.println("+ Não conseguiu gravar o arquivo.              +" + e.getMessage());
 		}
+	}
+	
+	public static void salvarResultado(Resultado r) {
+		try (ObjectOutput out = new ObjectOutputStream(new FileOutputStream("resultado.obj"))) {
+			out.writeObject(r);
+			System.out.println("+ Resultado salvo com sucesso.                 +");
+		} catch (IOException e) {
+			System.err.println("+ Erro ao salvar resultado.                    +" + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	public static Resultado carregarResultado() throws NullPointerException {
+		Resultado result = null; 
+		try (ObjectInput in = new ObjectInputStream(new FileInputStream("resultado.obj"))) {
+			result = (Resultado) in.readObject();
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }
