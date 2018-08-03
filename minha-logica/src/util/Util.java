@@ -104,9 +104,6 @@ public class Util {
 	}
 
 	public static void salvarVolantes(List<Volante> listaVolantes) {
-//		File file = new File("volantes.obj");
-//		file.delete();
-
 		try (ObjectOutput out = new ObjectOutputStream(new FileOutputStream("volantes.obj"))) {
 			out.writeObject(listaVolantes);
 			System.out.println("+ Volantes salvos com sucesso.                 +");
@@ -122,7 +119,8 @@ public class Util {
 		try (ObjectInput in = new ObjectInputStream(new FileInputStream("volantes.obj"))) {
 			volantes = (List<Volante>) in.readObject();
 		} catch (IOException | ClassNotFoundException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			return volantes;
 		}
 		return volantes;
 	}
@@ -159,13 +157,15 @@ public class Util {
 		}
 	}
 	
-	public static Resultado carregarResultado() throws NullPointerException {
+	public static Resultado carregarResultado() {
 		Resultado result = null; 
 		try (ObjectInput in = new ObjectInputStream(new FileInputStream("resultado.obj"))) {
 			result = (Resultado) in.readObject();
 		} catch (IOException | ClassNotFoundException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			return result;
 		}
 		return result;
 	}
+	
 }

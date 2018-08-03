@@ -80,76 +80,82 @@ public class Menu {
 		} else if (opcao.equalsIgnoreCase("3")) {
 			Resultado resultado = Util.carregarResultado();
 			if (resultado == null) {
-				System.out.println("+ Nenhum resultado na base de dados.           +");
+				System.out.println("+ Nenhum sorteio salvo na base de dados.       +");
 				controlador();
 			} else {
 				todosVolantes = Util.carregarTodosVolantes();
-				int p11 = 0;
-				int p12 = 0;
-				int p13 = 0;
-				int p14 = 0;
-				int p15 = 0;
-				for (Volante v : todosVolantes) {
-					Util.conferirVolante(v, resultado);
-					if (v.getPontuacao() == 11) {
-						p11++;
-					}
-					if (v.getPontuacao() == 12) {
-						p11++;
-					}
-					if (v.getPontuacao() == 13) {
-						p11++;
-					}
-					if (v.getPontuacao() == 14) {
-						p11++;
-					}
-					if (v.getPontuacao() == 15) {
-						p11++;
-					}
-				}
-				System.out.println("================================================");
-				imprimirVolantePontuacao();
-				System.out.println("================================================");
-				System.out.println("+ Relatório de pontuação                       +");
-				System.out.println("+ 11 pontos: " + p11 + "                                 +");
-				System.out.println("+ 12 pontos: " + p12 + "                                 +");
-				System.out.println("+ 13 pontos: " + p13 + "                                 +");
-				System.out.println("+ 14 pontos: " + p14 + "                                 +");
-				System.out.println("+ 15 pontos: " + p15 + "                                 +");
-				System.out.println("================================================");
-
-				System.out.println("+ m. Menu Inicial                              +");
-				System.out.println("+ i. Imprimir TXT                              +");
-
-				String comando = null;
-				boolean exibirMensagem = false;
-				do {
-					if (exibirMensagem == true) {
-						System.out.println("+ Opção inválida.                              +");
-					}
-
-					comando = in.next();
-					exibirMensagem = true;
-				} while ((comando == null) || (!comando.equalsIgnoreCase("m") && !comando.equalsIgnoreCase("i")));
-
-				if (comando.equalsIgnoreCase("m")) {
+				
+				if(todosVolantes.isEmpty()) {
+					System.out.println("+ Nenhum volante para conferir.                +");
 					controlador();
-				} else if (comando.equalsIgnoreCase("i")) {
-					try (PrintStream writer = new PrintStream("relatorio.txt")) {
-
-						writer.println("Relat. de Pontos");
-						writer.println();
-						writer.println("11 pontos: " + p11);
-						writer.println("12 pontos: " + p12);
-						writer.println("13 pontos: " + p13);
-						writer.println("14 pontos: " + p14);
-						writer.println("15 pontos: " + p15);
-
-						System.out.println("+ Relatório impresso com sucesso.              +");
-					} catch (IOException e) {
-						System.out.println("+ Não conseguiu gravar o arquivo.              +" + e.getMessage());
+				} else {
+					int p11 = 0;
+					int p12 = 0;
+					int p13 = 0;
+					int p14 = 0;
+					int p15 = 0;
+					for (Volante v : todosVolantes) {
+						Util.conferirVolante(v, resultado);
+						if (v.getPontuacao() == 11) {
+							p11++;
+						}
+						if (v.getPontuacao() == 12) {
+							p11++;
+						}
+						if (v.getPontuacao() == 13) {
+							p11++;
+						}
+						if (v.getPontuacao() == 14) {
+							p11++;
+						}
+						if (v.getPontuacao() == 15) {
+							p11++;
+						}
 					}
-					controlador();
+					System.out.println("================================================");
+					imprimirVolantePontuacao();
+					System.out.println("================================================");
+					System.out.println("+ Relatório de pontuação                       +");
+					System.out.println("+ 11 pontos: " + p11 + "                                 +");
+					System.out.println("+ 12 pontos: " + p12 + "                                 +");
+					System.out.println("+ 13 pontos: " + p13 + "                                 +");
+					System.out.println("+ 14 pontos: " + p14 + "                                 +");
+					System.out.println("+ 15 pontos: " + p15 + "                                 +");
+					System.out.println("================================================");
+	
+					System.out.println("+ m. Menu Inicial                              +");
+					System.out.println("+ i. Imprimir TXT                              +");
+	
+					String comando = null;
+					boolean exibirMensagem = false;
+					do {
+						if (exibirMensagem == true) {
+							System.out.println("+ Opção inválida.                              +");
+						}
+	
+						comando = in.next();
+						exibirMensagem = true;
+					} while ((comando == null) || (!comando.equalsIgnoreCase("m") && !comando.equalsIgnoreCase("i")));
+	
+					if (comando.equalsIgnoreCase("m")) {
+						controlador();
+					} else if (comando.equalsIgnoreCase("i")) {
+						try (PrintStream writer = new PrintStream("relatorio.txt")) {
+	
+							writer.println("Relat. de Pontos");
+							writer.println();
+							writer.println("11 pontos: " + p11);
+							writer.println("12 pontos: " + p12);
+							writer.println("13 pontos: " + p13);
+							writer.println("14 pontos: " + p14);
+							writer.println("15 pontos: " + p15);
+	
+							System.out.println("+ Relatório impresso com sucesso.              +");
+						} catch (IOException e) {
+							System.out.println("+ Não conseguiu gravar o arquivo.              +" + e.getMessage());
+						}
+						controlador();
+					}
 				}
 
 			}
