@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import modelo.Comeco;
 import modelo.Resultado;
 import modelo.Volante;
 
@@ -119,24 +120,24 @@ public class Util {
 		try (ObjectInput in = new ObjectInputStream(new FileInputStream("volantes.obj"))) {
 			volantes = (List<Volante>) in.readObject();
 		} catch (IOException | ClassNotFoundException e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 			return volantes;
 		}
 		return volantes;
 	}
 
 	public static void imprimirVolantesTXT(List<Volante> todosVolantes) {
-		try(PrintStream writer = new PrintStream("volantes_impressos.txt")){
-			
+		try (PrintStream writer = new PrintStream("volantes_impressos.txt")) {
+
 			writer.println("++++++++++ Volantes Impressos em TXT +++++++++++");
 			for (Volante vol : todosVolantes) {
 				writer.println();
 				String id = vol.getId();
 				writer.print(id + ": ");
-				for(String num : vol.getNumeros()) {
+				for (String num : vol.getNumeros()) {
 					writer.print(num + " ");
 				}
-				
+
 			}
 			writer.println();
 			writer.println();
@@ -146,7 +147,7 @@ public class Util {
 			System.out.println("+ Não conseguiu gravar o arquivo.              +" + e.getMessage());
 		}
 	}
-	
+
 	public static void salvarResultado(Resultado r) {
 		try (ObjectOutput out = new ObjectOutputStream(new FileOutputStream("resultado.obj"))) {
 			out.writeObject(r);
@@ -156,16 +157,73 @@ public class Util {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static Resultado carregarResultado() {
-		Resultado result = null; 
+		Resultado result = null;
 		try (ObjectInput in = new ObjectInputStream(new FileInputStream("resultado.obj"))) {
 			result = (Resultado) in.readObject();
 		} catch (IOException | ClassNotFoundException e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 			return result;
 		}
 		return result;
 	}
-	
+
+	public static List<Volante> sortearVolanteFechamentoMatriz(int idVolante, List<Comeco> comecos,
+			String[] finalVolante, int quantidadeNumerosParaSortear, int quantidadeTrocaFechamento) {
+
+		List<Volante> volantesGerados = new ArrayList<>();
+
+		for (Comeco comeco : comecos) {
+
+			List<String> numerosSorteados = new ArrayList<>();
+			List<String> finalVolanteLista = new ArrayList<>();
+			int indiceNumeroEscolhido = 0;
+
+			// Transformando o final dos volantes array em lista.
+			for (String numero : finalVolante) {
+				finalVolanteLista.add(numero);
+			}
+
+			// Sorteando a quantidade de números desejados para o fim do volante.
+			for (int i = 1; i <= quantidadeNumerosParaSortear; i++) {
+				indiceNumeroEscolhido = random.nextInt(finalVolanteLista.size());
+				numerosSorteados.add(finalVolanteLista.get(indiceNumeroEscolhido));
+				finalVolanteLista.remove(indiceNumeroEscolhido);
+			}
+
+			// Instanciando o volante sorteado.
+			Volante volanteSorteado = new Volante(idVolante + "A");
+			for (String numero : numerosSorteados) {
+				volanteSorteado.getNumeros().add(numero);
+			}
+			inserirComeco(volanteSorteado, comeco.getNumeros());
+			ordenarVolante(volanteSorteado);
+			volantesGerados.add(volanteSorteado);
+
+			// Instanciando o volante fechado.
+
+			// Trocando números.
+			for (int i = 1; i <= quantidadeTrocaFechamento; i++) {
+				int indiceNumeroSerTrocado = random.nextInt(finalVolanteLista.size());
+				String numeroTroca = finalVolanteLista.get(indiceNumeroSerTrocado);
+				finalVolanteLista.remove(indiceNumeroSerTrocado);
+				numerosSorteados.remove(indiceNumeroSerTrocado);
+				numerosSorteados.add(numeroTroca);
+			}
+
+			Volante volanteFechado = new Volante(idVolante + "B");
+			Util.ids++; // Ao gerar um volante aumenta-se o último id;
+			idVolante++;
+			for (String numero : numerosSorteados) {
+				volanteFechado.getNumeros().add(numero);
+			}
+			inserirComeco(volanteFechado, comeco.getNumeros());
+			ordenarVolante(volanteFechado);
+			volantesGerados.add(volanteFechado);
+		}
+
+		return volantesGerados;
+	}
+
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import fim.cinco.FimCinco;
+import fim.cinco.FimUm;
 import modelo.Resultado;
 import modelo.Volante;
 import util.Util;
@@ -237,6 +238,12 @@ public class Menu {
 		FimCinco fc = new FimCinco();
 		List<Volante> volantesComecoCinco = fc.gerarVolantes();
 		for (Volante v : volantesComecoCinco) {
+			todosVolantes.add(v);
+		}
+		
+		FimUm fu = new FimUm();
+		List<Volante> volantesComecoUm = fu.gerarVolantes();
+		for (Volante v : volantesComecoUm) {
 			todosVolantes.add(v);
 		}
 	}
