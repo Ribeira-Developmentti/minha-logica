@@ -235,11 +235,11 @@ public class Menu {
 	}
 
 	private static void gerarTodosVolantes() {
-		FimCinco fc = new FimCinco();
+		/*FimCinco fc = new FimCinco();
 		List<Volante> volantesComecoCinco = fc.gerarVolantes();
 		for (Volante v : volantesComecoCinco) {
 			todosVolantes.add(v);
-		}
+		}*/
 		
 		FimUm fu = new FimUm();
 		List<Volante> volantesComecoUm = fu.gerarVolantes();

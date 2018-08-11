@@ -24,7 +24,7 @@ public class FimUm {
 	public FimUm() {
 		this.volantesGerados = new ArrayList<Volante>();
 		this.setQuantidadeNumerosSortear(14);
-		this.setQuantidadeTrocaFechamento(6);
+		this.setQuantidadeTrocaFechamento(4);
 
 		this.comecos = new ArrayList<>();
 		this.comecos.add(new Comeco(comeco01));
