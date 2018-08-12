@@ -1,4 +1,4 @@
-package fim.cinco;
+package fim;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class FimCinco {
 	public FimCinco() {
 		this.volantesGerados = new ArrayList<Volante>();
 		this.setQuantidadeNumerosSortear(10);
-		this.setQuantidadeTrocaFechamento(6);
+		this.setQuantidadeTrocaFechamento(3);
 	}
 	
 	public List<Volante> gerarVolantes() {

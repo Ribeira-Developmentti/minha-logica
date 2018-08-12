@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import fim.cinco.FimCinco;
-import fim.cinco.FimUm;
+import fim.FimCinco;
+import fim.FimDois;
+import fim.FimQuatro;
+import fim.FimTres;
+import fim.FimUm;
 import modelo.Resultado;
 import modelo.Volante;
 import util.Util;
@@ -85,8 +88,8 @@ public class Menu {
 				controlador();
 			} else {
 				todosVolantes = Util.carregarTodosVolantes();
-				
-				if(todosVolantes.isEmpty()) {
+
+				if (todosVolantes.isEmpty()) {
 					System.out.println("+ Nenhum volante para conferir.                +");
 					controlador();
 				} else {
@@ -101,16 +104,16 @@ public class Menu {
 							p11++;
 						}
 						if (v.getPontuacao() == 12) {
-							p11++;
+							p12++;
 						}
 						if (v.getPontuacao() == 13) {
-							p11++;
+							p13++;
 						}
 						if (v.getPontuacao() == 14) {
-							p11++;
+							p14++;
 						}
 						if (v.getPontuacao() == 15) {
-							p11++;
+							p15++;
 						}
 					}
 					System.out.println("================================================");
@@ -123,26 +126,26 @@ public class Menu {
 					System.out.println("+ 14 pontos: " + p14 + "                                 +");
 					System.out.println("+ 15 pontos: " + p15 + "                                 +");
 					System.out.println("================================================");
-	
+
 					System.out.println("+ m. Menu Inicial                              +");
 					System.out.println("+ i. Imprimir TXT                              +");
-	
+
 					String comando = null;
 					boolean exibirMensagem = false;
 					do {
 						if (exibirMensagem == true) {
 							System.out.println("+ Opção inválida.                              +");
 						}
-	
+
 						comando = in.next();
 						exibirMensagem = true;
 					} while ((comando == null) || (!comando.equalsIgnoreCase("m") && !comando.equalsIgnoreCase("i")));
-	
+
 					if (comando.equalsIgnoreCase("m")) {
 						controlador();
 					} else if (comando.equalsIgnoreCase("i")) {
 						try (PrintStream writer = new PrintStream("relatorio.txt")) {
-	
+
 							writer.println("Relat. de Pontos");
 							writer.println();
 							writer.println("11 pontos: " + p11);
@@ -150,7 +153,7 @@ public class Menu {
 							writer.println("13 pontos: " + p13);
 							writer.println("14 pontos: " + p14);
 							writer.println("15 pontos: " + p15);
-	
+
 							System.out.println("+ Relatório impresso com sucesso.              +");
 						} catch (IOException e) {
 							System.out.println("+ Não conseguiu gravar o arquivo.              +" + e.getMessage());
@@ -235,17 +238,36 @@ public class Menu {
 	}
 
 	private static void gerarTodosVolantes() {
-		/*FimCinco fc = new FimCinco();
-		List<Volante> volantesComecoCinco = fc.gerarVolantes();
-		for (Volante v : volantesComecoCinco) {
-			todosVolantes.add(v);
-		}*/
-		
 		FimUm fu = new FimUm();
 		List<Volante> volantesComecoUm = fu.gerarVolantes();
 		for (Volante v : volantesComecoUm) {
 			todosVolantes.add(v);
 		}
+
+		FimDois fd = new FimDois();
+		List<Volante> volantesComecoDois = fd.gerarVolantes();
+		for (Volante v : volantesComecoDois) {
+			todosVolantes.add(v);
+		}
+
+		FimTres ft = new FimTres();
+		List<Volante> volantesComecoTres = ft.gerarVolantes();
+		for (Volante v : volantesComecoTres) {
+			todosVolantes.add(v);
+		}
+
+		FimQuatro fq = new FimQuatro();
+		List<Volante> volantesComecoQuatro = fq.gerarVolantes();
+		for (Volante v : volantesComecoQuatro) {
+			todosVolantes.add(v);
+		}
+
+		FimCinco fc = new FimCinco();
+		List<Volante> volantesComecoCinco = fc.gerarVolantes();
+		for (Volante v : volantesComecoCinco) {
+			todosVolantes.add(v);
+		}
+
 	}
 
 	private static String menuInicial() {
